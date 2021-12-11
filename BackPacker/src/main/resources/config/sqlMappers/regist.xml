@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="regist">
+
+<!-- 테이블 생성시 쿼리는 다음과 같습니다. -->
+
+
+<!--
+
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+Table `mydb`.`USER`
+
+CREATE TABLE IF NOT EXISTS `mydb`.`USER` (
+  `F_NAME` VARCHAR(20) NOT NULL,			//이름
+  `F_NICKNAME` VARCHAR(30) NOT NULL,			//별명	
+  `F_PASS` VARCHAR(100) NOT NULL,				//비밀번호
+  `F_HP` VARCHAR(20) NOT NULL,                  //전화번호
+  `F_EMAIL' VARCHAR(100) NOT NULL,                //이메일
+  `F_GENDER` VARCHAR(2) NULL,               //성별
+  PRIMARY KEY (`F_EMAIL`))					// 이메일 FK설정
+ENGINE = InnoDB;
+
+
+Table `mydb`.`PRODUCT`
+
+CREATE TABLE IF NOT EXISTS `mydb`.`PRODUCT` (
+  `F_NUM` VARCHAR(12) NOT NULL,				//주문번호
+  `F_EMAIL` VARCHAR(100) NOT NULL,				//주문자
+  `F_NAME` VARCHAR(100) NOT NULL,				//제품명
+  `F_PAY_DATE` DATETIME NOT NULL,				//구매일시
+  PRIMARY KEY (`F_NUM`))
+ENGINE = InnoDB;
+
+
+-->
+	
+	<insert id="insertUser" parameterType="registVo">
+		INSERT INTO USER 
+		(
+			F_EMAIL,
+			F_NAME,
+			F_NICKNAME,
+			F_PASS,
+			F_HP,
+			F_GENDER
+		)
+		VALUES
+		(
+			#{F_EMAIL},
+			#{F_NAME},
+			#{F_NICKNAME},
+			#{F_PASS},
+			#{F_HP},
+			#{F_GENDER}
+		)
+	</insert>
+	
+	<select id="selectUserFemail" parameterType="String" resultType="String">
+		SELECT
+			F_EMAIL
+		FROM USER
+		WHERE F_EMAIL = #{F_EMAIL}
+	</select>
+
+</mapper>
+
